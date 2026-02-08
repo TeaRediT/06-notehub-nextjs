@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { Note } from "@/types/note";
 
-type CreateNote = Omit<Note, "id" | "createdAt">;
+type CreateNote = Omit<Note, "id" | "createdAt" | "updatedAt">;
 
 export interface NoteList {
   notes: Note[];
@@ -27,7 +27,7 @@ export const fetchNotes = async (
 };
 
 export const fetchNoteById = async (id: string): Promise<Note> => {
-  const { data } = await axios.get(
+  const { data } = await axios.get<Note>(
     `https://notehub-public.goit.study/api/notes/${id}`,
     options,
   );
